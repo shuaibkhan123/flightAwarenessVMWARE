@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+  <title>Flights</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">
+      <img src="/Images/airplane.svg" width="20" height="20" class="d-inline-block align-top" alt="">
+      FightAware
+    </a>
+  
+    <li class="nav-item">
+      <a class=" btn btn-success " href="/flightSchedules" role="button">Flight Dates</a>
+      <a class=" btn btn-success " href="/uguides" role="button">User Guides</a>
+      <a class=" btn btn-success " href="/countryList" role="button">Countries</a>
+      <a class=" btn btn-success " href="/currencyList" role="button">Currencies</a>
+      <a class=" btn btn-success " href="/bestFlight" role="button">Flight price</a>
+      <a class=" btn btn-success " href="/cities" role="button">Cities to visit</a>
+    </li>
+
+<h1>Flight Schedules</h1>
+<form th:action="@{/flightSchedules}" th:object="${userip}" method="post">
+  <label for="depature">Depature:</label><br>
+  <input type="text" id="depature" th:field="*{depature}"><br>
+  <label for="arrival">Arrival:</label><br>
+  <input type="text" id="arrival" th:field="*{arrival}"><br>
+  <label for="date">Date:</label><br>
+  <input type="text" id="date" th:field="*{date}"><br>
+  <br>
+  <input type="submit" value="Submit">
+</form>
+<table th:if="${flightDetails}" th:style="display: ${flightDetails.empty} ? 'none' : 'table'">
+  <tr>
+    <th>Origin Name</th>
+    <th>Destination Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+  </tr>
+  <tr th:each="detail : ${flightDetails}">
+    <td th:text="${detail.originName}"></td>
+    <td th:text="${detail.destinationName}"></td>
+    <td th:text="${detail.startDate}"></td>
+    <td th:text="${detail.endDate}"></td>
+  </tr>
+</table>
+
+</body>
+</html>
